@@ -8,10 +8,12 @@ class RedisClient {
         this.client.on('connect', () => {
             this.connected = true;
         });
+        // this.client.connect();
     }
     
     isAlive() {
         return this.connected;
+        // return this.client.isOpen;
     }
 
     async get(key) {
