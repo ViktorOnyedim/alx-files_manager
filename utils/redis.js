@@ -8,12 +8,10 @@ class RedisClient {
         this.client.on('connect', () => {
             this.connected = true;
         });
-        // this.client.connect();
     }
     
     isAlive() {
         return this.connected;
-        // return this.client.isOpen;
     }
 
     async get(key) {
@@ -26,7 +24,6 @@ class RedisClient {
                 resolve(value);
             });
         });
-        // return await this.client.get(key);
     }
 
     async set(key, value, dur) {
@@ -38,8 +35,7 @@ class RedisClient {
                 }
                 resolve();
             });
-        })
-        // return await this.client.set(key, value);
+        });
     }
 
     async del(key) {
@@ -52,7 +48,6 @@ class RedisClient {
               resolve();
             });
           });
-        // return await this.client.del(key);
     }
 }
 
