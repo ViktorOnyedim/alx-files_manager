@@ -1,7 +1,13 @@
 // import { MongoClient } from 'mongodb'
 const { MongoClient } = require('mongodb');
 
+/**
+ * Represents a MongoDB client
+ */
 class DBClient {
+    /**
+     * Creates a new DBClient instance
+     */
     constructor() {
         const host = process.env.DB_HOST || 'localhost';
         const port = process.env.DB_PORT || 27017;
@@ -16,11 +22,18 @@ class DBClient {
             .catch((err) => console.error('Failed to connect to MongoDB:', err));
     }
 
-
+    /**
+     * Checks if connetion to MongoDB server is active
+     * @returns {boolean} connection status
+     */
     isAlive() {
         return this.client.isConnected();
     }
 
+    /**
+     * Get the number of documents in the collection users
+     * @returns {Promise<number>} Number of documents
+     */
     async nbUsers() {
         try {
             const db = this.client.db(this.dbName);
@@ -32,6 +45,10 @@ class DBClient {
         }
     }
 
+    /**
+     * Get the number of files in the collection files 
+     * @returns {Promise<number>} Number of files
+     */
     async nbFiles() {
         try {
             const db = this.client.db(this.dbName);
