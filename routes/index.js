@@ -4,11 +4,17 @@ const AppController = require('../controllers/AppController');
 const router = express.Router();
 
 // Define routes
-router.get('/status', (req, res) => {
-  AppController.getStatus
-});
-router.get('/stats', (req, res) => {
-  AppController.getStats
-});
+const routeController = (app) => {
+  app.use('/', router);
+  
+  router.get('/status', (req, res) => {
+     AppController.getStatus(req, res);
+  });
 
-module.exports = router;
+  router.get('/stats', (req, res) => {
+    AppController.getStats(req, res);
+  });
+};
+
+
+module.exports = routeController;
