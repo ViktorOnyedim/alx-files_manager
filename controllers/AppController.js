@@ -1,8 +1,8 @@
 const redisClient = require('../utils/redis');
 const dbClient = require('../utils/db');
 
-const endpoints = {
-  getStatus: async (req, res) => {
+class AppController {
+  static getStatus(req, res) {
     try {
       const redisStatus = redisClient.isAlive();
       const dbStatus = dbClient.isAlive();
@@ -17,9 +17,9 @@ const endpoints = {
         error: 'Internal Server Error',
       });
     }
-  },
+  }
 
-  getStats: async (req, res) => {
+  static async getStats(req, res) {
     try {
       const userCount = await dbClient.nbUsers();
       const fileCount = await dbClient.nbFiles();
@@ -37,4 +37,4 @@ const endpoints = {
   }
 };
 
-module.exports = endpoints;
+export default AppController;
